@@ -36,10 +36,8 @@ body {
 }
 
 header {
-    background-color: #c28d75;
-    padding: 25px;
     font-family: "Arial", "Helvetica", sans-serif;
-    text-align: left;
+    text-align: start;
     font-size: 30px;
     color: #c99983;
 }

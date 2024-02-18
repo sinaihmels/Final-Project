@@ -9,19 +9,109 @@
     <p>6 tiles all the same size</p>
     <p>each tile consists of a header or title, the goal, the current, an iput bar to input what you accieves and the pixelart</p>
     <div class="grid-container">
-        <div class="grid-item">
-            <h2>Drink 2 liters of water.</h2>
-            <p> I already drank </p>
-            <p>liters of water.</p>
+        <div class="grid-item" name="water">
+            <h2 class="goal">
+                Drink 2 liters of water.
+            </h2>
+            <div class="current status">
+                <p> I already drank </p>
+                <!--get current amount-->
+                <p>liters of water.</p>
+            </div>
+
             <p>How much more did you drink?</p>
-            <input type="number" id="morewater" min="1">
-            <button type="submit">mililiters</button>
+            <input type="number" id="morewater" min="0" step="100">
+            <button type="submit">
+                mililiters
+            </button>
         </div>
-        <div class="grid-item">workout</div>
-        <div class="grid-item">read</div>
-        <div class="grid-item">meditate</div>
-        <div class="grid-item">sleep</div>
-        <div class="grid-item">time outside</div>
+
+        <div class="grid-item" name="workout">
+            <h2 class="goal">
+                Workout 20 minutes today.
+            </h2>
+            <div class="current status">
+                <p> I already worked out </p>
+                <!--get current amount-->
+                <p>minutes today.</p>
+            </div>
+
+            <p>How long was your workout?</p>
+            <input type="number" id="moreworkout" min="1">
+            <button type="submit">
+                minutes
+            </button>
+        </div>
+
+
+        <div class="grid-item" name="read">
+            <h2 class="goal">
+                Read 10 pages in a day.
+            </h2>
+            <div class="current status">
+                <p> I already read </p>
+                <!--get current amount-->
+                <p>pages.</p>
+            </div>
+
+            <p>How many pages did you read?</p>
+            <input type="number" id="morereading" min="0">
+            <button type="submit">
+                pages
+            </button>
+        </div>
+
+
+        <div class="grid-item" name="mediatate">
+            <h2 class="goal">
+                Meditate for 10 minutes.
+            </h2>
+            <div class="current status">
+                <p> I already meditated for  </p>
+                <!--get current amount-->
+                <p>minutes.</p>
+            </div>
+
+            <p>How much more did you meditate?</p>
+            <input type="number" id="morewater" min="0" step="100">
+            <button type="submit">
+                minutes
+            </button>
+        </div>
+
+        <div class="grid-item" name="sleep">
+            <h2 class="goal">
+                Sleep for 7 hours.
+            </h2>
+            <div class="current status">
+                <p>You already slept for</p>
+                <!--get current amount-->
+                <p>hours today.</p>
+            </div>
+
+            <p>How long did you sleep?</p>
+            <input type="number" id="morewater" min="0" step="100">
+            <button type="submit">
+                hours
+            </button>
+        </div>
+
+        <div class="grid-item" name="timeoutside">
+            <h2 class="goal">
+                Spend 30 minutes outside today.
+            </h2>
+            <div class="current status">
+                <p> I already spend </p>
+                <!--get current amount-->
+                <p>minutes outside today.</p>
+            </div>
+
+            <p>How long were you outside?</p>
+            <input type="number" id="morewater" min="0" step="100">
+            <button type="submit">
+                minutes
+            </button>
+        </div>
     </div>
 
 {% endblock %}

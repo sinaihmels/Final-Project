@@ -12,11 +12,8 @@
 </head>
 <body>
     <header>
-        <h2>My Habits</h2>
-        <image src="/static/Logo.ico" class="img-fluid" alt="a picture of the logo"></image>
-    </header>
-
-    </div>
+        <image src="/static/Logo.ico" class="img-fluid" alt="a picture of the logo"><h2>My Habits</h2></image>
+    
         <div class="topnav" id="navbar">
             <a class="nav-link" href="/index">Home</a>
             <a class="nav-link" href="/settings">Settings</a>
@@ -24,13 +21,17 @@
             <a class="nav-link" href="/login"> Log In </a>
             <a class="nav-link" href="/register">Register</a>
         </div>
+    </header>
+
+    
+
         
     <main class="container">
         {% block main %}{% endblock %}
     </main>
     <div class="footer">
         A website created by Sina Ihmels
-    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
