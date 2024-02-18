@@ -1,0 +1,88 @@
+
+/* list of the colors: 
+    black: #000000
+    dark grey: #6f6776
+    grey green: #9a9a97
+    really light green #c5ccb8
+    purple: #8b5580
+    pink: #c38890
+    light purple grey: #a593a5
+    blue purple: #666092
+    red: #9a4f50
+    orange red light: #c28d75
+    light blue: #7ca1c0
+    medium blue: #416aa3
+    dirty red brown: #8d6268
+    light orange: #be955c
+    turquise: #68aca9
+    dark turquise: #387080
+    grey: #6e6962
+    light green: #93a167
+    green: #6eaa78
+    dirty green: #557064
+    green grey light: #9d9f7f
+    blue grey light: #7e9e99
+    blue grey: #5d6872
+    dark purple: #433455
+    white background: #F6F3EE
+*/
+
+body {
+    background-color: #F6F3EE;
+    font-family: "Arial", "Helvetica", sans-serif;
+    font-size: small;
+    background-image: url("/static/background.jpg");
+    background-size: cover;
+}
+
+header {
+    background-color: #c28d75;
+    padding: 25px;
+    font-family: "Arial", "Helvetica", sans-serif;
+    text-align: left;
+    font-size: 30px;
+    color: #c99983;
+}
+
+footer {
+    display: block;
+    font-family: "Arial", "Helvetica", sans-serif;
+    font-size: 10px;
+}
+
+.topnav{
+    overflow: hidden;
+    background-color: #c28d75;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+
+.topnav a {
+float: right;
+display: block;
+color: #472c1f;
+text-align: center;
+padding: 14px 40px;
+text-decoration: none;
+}
+
+.topnav a:hover {
+background-color: #c99983;
+color: #120b08;
+}
+
+.grid-container {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+    grid-auto-columns: max-content;
+}
+  
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+}

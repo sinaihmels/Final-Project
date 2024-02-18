@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <h1>What does this website need?</h1>
+    <p>6 tiles all the same size</p>
+    <p>each tile consists of a header or title, the goal, the current, an iput bar to input what you accieves and the pixelart</p>
+    <div class="grid-container">
+        <div class="grid-item">
+            <h2>Drink 2 liters of water.</h2>
+            <p> I already drank </p>
+            <p>liters of water.</p>
+            <p>How much more did you drink?</p>
+            <input type="number" id="morewater" min="1">
+            <button type="submit">mililiters</button>
+        </div>
+        <div class="grid-item">workout</div>
+        <div class="grid-item">read</div>
+        <div class="grid-item">meditate</div>
+        <div class="grid-item">sleep</div>
+        <div class="grid-item">time outside</div>
+    </div>
+
+{% endblock %}

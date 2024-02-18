@@ -1,0 +1,4 @@
+Flask
+requests
+functools
+to make the navbar https://getbootstrap.com/docs/5.0/components/navbar/
