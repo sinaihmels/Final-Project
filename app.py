@@ -6,14 +6,14 @@ app = Flask(__name__) #we initiate the Flask application
 def index():
     return render_template('index.html')
 
-@app.route("/login" methods="GET", "POST")
+@app.route("/login", methods=["GET", "POST"])
 def login():
     session.clear()
 
-    if request.method="GET":
+    if request.method == "GET":
         render_template('login.html')
 
-    if request.method="POST":
+    if request.method == "POST":
         # check that input is not empty 
         if not request.form.get("username"):
             return apology("Must input a username.", 403)
