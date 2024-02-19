@@ -5,15 +5,13 @@
 {% endblock %}
 
 {% block main %}
-    <h1>What does this website need?</h1>
-    <p>6 tiles all the same size</p>
-    <p>each tile consists of a header or title, the goal, the current, an iput bar to input what you accieves and the pixelart</p>
     <div class="grid-container">
         <div class="grid-item" name="water">
             <h2 class="goal">
                 Drink 2 liters of water.
             </h2>
-            <img src="/pictures/water/0.png" alt="empty glass">
+            <img src="/static/pictures/water/0.png" alt="empty glass" class="img-fluid" type="image" style="width: 150px; height: 150px;">
+            <img src="/static/pictures/water/water.gif" alt="gif of the glass" style="width: 150px; height: 150px;">
             <div class="current status">
                 <p> I already drank </p>
                 <!--get current amount-->

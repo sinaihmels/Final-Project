@@ -2,3 +2,28 @@ Flask
 requests
 functools
 to make the navbar https://getbootstrap.com/docs/5.0/components/navbar/
+
+Notes from the SQL database
+CREATE TABLE users (
+id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+username TEXT NOT NULL,
+hash TEXT NOT NULL
+);
+
+CREATE TABLE preferences (
+user_id INTEGER,
+id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+habitA TEXT NOT NULL,
+goalA INTEGER NOT NULL,
+habitB TEXT NOT NULL,
+goalB INTEGER NOT NULL,
+habitC TEXT NOT NULL,
+goalC INTEGER NOT NULL,
+habitD TEXT NOT NULL,
+goalD INTEGER NOT NULL,
+habitE TEXT NOT NULL,
+goalE INTEGER NOT NULL,
+habitF TEXT NOT NULL,
+goalF INTEGER NOT NULL,
+FOREIGN KEY (user_id) REFERENCES users(id)
+);
