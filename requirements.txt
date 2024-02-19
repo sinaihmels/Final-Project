@@ -27,3 +27,5 @@ habitF TEXT NOT NULL,
 goalF INTEGER NOT NULL,
 FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+https://docs.python.org/3/library/sqlite3.html

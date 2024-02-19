@@ -1,3 +1,4 @@
+from ssl import AlertDescription
 import bcrypt 
 
 def hash_password(password: str):
