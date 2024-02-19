@@ -38,7 +38,7 @@ body {
 header {
     font-family: "Arial", "Helvetica", sans-serif;
     text-align: start;
-    font-size: 30px;
+    font-size: large;
     color: #c99983;
 }
 
@@ -51,7 +51,8 @@ footer {
 .topnav{
     overflow: hidden;
     background-color: #c28d75;
-    font-family: Arial, Helvetica, sans-serif
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
 }
 
 
