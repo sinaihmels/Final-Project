@@ -51,7 +51,8 @@ def settings():
 @app.route("/register")
 def register():
     return render_template('register.html')
-    # check that the iput is not empty
+    # check that the input is not empty
+    if not request.form.get("")
     # check that the password and the confirmation are identical
     # hash the password with the hash_password function
     # Input the username and the hashed password into the table users 
