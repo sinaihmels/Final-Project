@@ -85,3 +85,36 @@ color: #120b08;
     font-size: 30px;
     text-align: center;
 }
+
+.verticalnavbar{
+    background-color: #c28d75;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 120px;
+    height: 300px;
+}
+
+
+.verticalnavbar a {
+display: block;
+color: #472c1f;
+padding: 8px 16px;
+text-decoration: none;
+}
+
+.verticalnavbar a:hover {
+background-color: #c99983;
+color: #120b08;
+}
+
+.settingheader {
+    text-align: center;
+}
+
+#chosenelement {
+    font-size: large;
+    background-color: #9a9a97;
+}

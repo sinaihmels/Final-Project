@@ -70,6 +70,21 @@ def settings():
     return render_template('settings.html')
     #write the settings function
 
+@app.route("/settingsuser")
+@login_required
+def settingsuser():
+    return render_template("settingsuser.html")
+
+@app.route("/settingsmh")
+@login_required
+def settingsmh():
+    return render_template("settingsmh.html")
+
+@app.route("/settingsdesign")
+@login_required
+def settingsdesign():
+    return render_template("settingsdesign.html")
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -112,3 +127,4 @@ def register():
             return redirect("/")
     else:
         return render_template("register.html")
+    

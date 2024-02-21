@@ -1,19 +1,19 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Settings
+    Settings Design
 {% endblock %}
 
 {% block main %}
     <h2 class="settingheader">Settings</h2>
     <ul class="verticalnavbar">
-        <a href="/settingsuser" class="verticalnavbarelement">
+        <a href="/settingsuser">
             <img src="/static/settings/user.png" width="20px" height="20px">User
         </a>
         <a href="/settingsmh">
             <img src="/static/settings/MH.jpg" width="20px" height="20px">Habits
         </a>
-        <a href="/settingsdesktop" class="vertical navbar element">
+        <a href="/settingsdesktop" class="vertical navbar element" id="chosenelement">
             <img src="/static/settings/desktop.png" width="20px" height="20px">Design
         </a>
     </ul>
