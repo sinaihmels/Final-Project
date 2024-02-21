@@ -29,3 +29,24 @@ FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 https://docs.python.org/3/library/sqlite3.html
+
+
+
+
+
+
+
+
+        
+### https://docs.python.org/3/library/sqlite3.html#sqlite3-placeholders ###
+
+import sqlite3
+
+con = sqlite3.connect("test.db")
+
+cur = con.cursor()
+
+res = cur.execute("SELECT * from movie")
+
+# fetches the first result row and gets the second column of that row, in this case score
+print(res.fetchone()[2])
