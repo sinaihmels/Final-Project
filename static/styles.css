@@ -33,6 +33,7 @@ body {
     font-size: small;
     background-image: url("/static/background.jpg");
     background-size: cover;
+    margin: 0;
 }
 
 header {
@@ -93,8 +94,9 @@ color: #120b08;
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 120px;
-    height: 300px;
+    width: 7%;
+    height: 70%;
+    position: fixed;
 }
 
 
@@ -117,4 +119,12 @@ color: #120b08;
 #chosenelement {
     font-size: large;
     background-color: #9a9a97;
+}
+.container {
+background-color: #9a9a97;
+padding: 1px 16px;
+}
+
+#savechangesbutton {
+    background-color: #6f6776;
 }

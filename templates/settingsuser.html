@@ -18,5 +18,31 @@
         </a>
     </ul>
 
-    
+    <form action="/settingsuser" method="post">
+        <div class="container" style="margin-left:8%; padding:3px 16px; height:600x;">
+            <h2>Update your user settings:</h2>
+            <p></p>
+        
+            <div>To change your username write a new username and click "Update username" to save the new username</div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" autocomplete="off" autofocus name="username" placeholder={{username}} type="text">
+            </div>
+            <p></p>
+
+            <div>To change your password input your current password and then your new password two times. To save the new password click "Update password".</div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" name="new_password" placeholder="New Password" type="password">
+            </div>
+            <div class="mb-3">
+               <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Confirm New password" type="password">
+            </div>
+            <div>
+                <button class="btn btn-primary" id="updateusername" type="submit" name="option1">Update username</button>
+                <button class="btn btn-primary" id="updatepassword" type="submit" name="option2">Update password</button>
+            </div>
+        </div>
+    </form>
 {% endblock %}

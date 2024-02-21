@@ -64,16 +64,67 @@ def logout():
     # forget who was logged in
     # redirect to log in
 
-@app.route("/settings")
+@app.route("/settings", methods=["GET", "POST"])
 @login_required
 def settings():
     return render_template('settings.html')
     #write the settings function
 
-@app.route("/settingsuser")
+
+
+@app.route("/settingsuser", methods= ["GET", "POST"])
 @login_required
 def settingsuser():
-    return render_template("settingsuser.html")
+    if request.method == "GET":
+        username=session["user_id"]
+        return render_template("settingsuser.html", username=username)
+    
+    if request.method == "POST":
+        with sqlite3.connect("database.db") as con:
+            cur = con.cursor()
+            # Find out which button was pressed and handle the input accordingly
+            one = request.form.get("option1")
+            two = request.form.get("option2")
+            if one is not None: 
+                # the update username button was pressed 
+                # validate the input
+                if not request.form.get("username"):
+                    return Response("Must input a new username", status=400)
+                
+                # update the username within the database
+                new_username = request.form.get("username")
+                cur.execute("UPDATE users SET username = ? WHERE id = ?", new_username, session["user_id"])
+                con.commit()
+                # Tell the user that the name is updated!!
+
+            elif two is not None:
+                # the update password button was pressed
+                # validate the input 
+                if not request.form.get("password"):
+                    return Response("Must input password", status=400)
+                # check that the old password is correct
+
+                # get the data from the matching username from the database and store this in the dictionary data
+                data = cur.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
+                user_data = data.fetchone()
+
+                # put the hash password from the database and the password that was in the input into the check_password_hash function
+                if check_password_hash(user_data[2], request.form.get("password")) is False:
+                    return Response ("Invalid password", status = 400)
+            
+                if not request.form.get("new_password"):
+                    return Response("Must input new password", status=400)
+                if not request.form.get("confirmation"):
+                    return Response("Must input the new password a second time", status=400)
+                if not request.form.get("new_password") == request.form.get("confirmation"):
+                    return Response("Must input a matching password and confirmation", status=400)
+                
+                # hash the new password and update the password within the database
+                hashnew = hash_password(request.form.get("new_password"))
+                cur.execute("UPDATE users SET hash = ? WHERE id = ?", hashnew, session["user_id"])
+                con.commit()
+                # Tell the user that the password was updated!!
+                
 
 @app.route("/settingsmh")
 @login_required
