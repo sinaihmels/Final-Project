@@ -76,8 +76,7 @@ def settings():
 @login_required
 def settingsuser():
     if request.method == "GET":
-        username=session["user_id"]
-        return render_template("settingsuser.html", username=username)
+        return render_template("settingsuser.html")
     
     if request.method == "POST":
         with sqlite3.connect("database.db") as con:
@@ -93,7 +92,8 @@ def settingsuser():
                 
                 # update the username within the database
                 new_username = request.form.get("username")
-                cur.execute("UPDATE users SET username = ? WHERE id = ?", new_username, session["user_id"])
+                user_id = session["user_id"]
+                cur.execute("UPDATE users SET username = ? WHERE id = ?", (new_username, user_id,))
                 con.commit()
                 # Tell the user that the name is updated!!
 
@@ -104,8 +104,9 @@ def settingsuser():
                     return Response("Must input password", status=400)
                 # check that the old password is correct
 
+                user_id = session["user_id"]
                 # get the data from the matching username from the database and store this in the dictionary data
-                data = cur.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
+                data = cur.execute("SELECT * FROM users WHERE id = ?", (user_id,))
                 user_data = data.fetchone()
 
                 # put the hash password from the database and the password that was in the input into the check_password_hash function
@@ -120,10 +121,12 @@ def settingsuser():
                     return Response("Must input a matching password and confirmation", status=400)
                 
                 # hash the new password and update the password within the database
+
                 hashnew = hash_password(request.form.get("new_password"))
-                cur.execute("UPDATE users SET hash = ? WHERE id = ?", hashnew, session["user_id"])
+                cur.execute("UPDATE users SET hash = ? WHERE id = ?", (hashnew, user_id,))
                 con.commit()
                 # Tell the user that the password was updated!!
+    return redirect("/")
                 
 
 @app.route("/settingsmh")
