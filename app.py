@@ -9,8 +9,6 @@ app = Flask(__name__) #we initiate the Flask application
 app.secret_key = b'91e7fb421e04cdb4d42f16860b24000a0018fe6da614105bf088cbd775c06f52'
 # Initialize the Database
 
-#test
-
 
 @app.route('/') #the / is the decorator (what to put into the URL) the / stands for the index page
 def index():
