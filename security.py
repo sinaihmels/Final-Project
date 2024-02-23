@@ -23,7 +23,7 @@ def check_password_hash(hashuser: str, passwordgiven: str) -> bool:
     userBytes = userPassword.encode('utf-8') 
     # checking password 
     result = bcrypt.checkpw(userBytes, hash) 
-    print(result)
+    return result
 
 def login_required(f):
     @wraps(f)
