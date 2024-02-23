@@ -17,4 +17,24 @@
             <img src="/static/settings/desktop.png" width="20px" height="20px"> Design
         </a>
     </ul>
+
+    <form action="/settingsuser" method="post">
+        <div class="container" style="margin-left:8%; padding:3px 16px; height:600x;">
+            <h2>Update your habit settings:</h2>
+            <p></p>
+        
+            <div>Select the six habits you want to track</div>
+            <div class="mb-3">
+                <!--checkboxes-->
+            </div>
+            <p></p>
+
+            <div>Select the goals for your habits</div>
+            <div class="mb-3">
+            </div>
+            <div>
+                <button class="btn btn-primary" id="updatehabits" type="submit">Update habits</button>
+            </div>
+        </div>
+    </form>
 {% endblock %}

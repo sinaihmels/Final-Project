@@ -14,6 +14,12 @@ app.secret_key = b'91e7fb421e04cdb4d42f16860b24000a0018fe6da614105bf088cbd775c06
 
 @app.route('/') #the / is the decorator (what to put into the URL) the / stands for the index page
 def index():
+    # if the session is not empty
+        # implement the habits found in the habits table 
+        # render_template with the data 
+    
+    # if session is empty (no one is logged in)
+        # render_template with the default user 
     return render_template('index.html')
 
 
