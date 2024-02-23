@@ -5,112 +5,26 @@
 {% endblock %}
 
 {% block main %}
-    <div class="grid-container">
-        <div class="grid-item" name="water">
-            <h2 class="goal">
-                Drink 2 liters of water.
-            </h2>
-            <img src="/static/pictures/water/0.png" alt="empty glass" class="img-fluid" type="image" style="width: 150px; height: 150px;">
-            <img src="/static/pictures/water/water.gif" alt="gif of the glass" style="width: 150px; height: 150px;">
-            <div class="current status">
-                <p> I already drank </p>
-                <!--get current amount-->
-                <p>liters of water.</p>
+    {% for row in rows %}
+        <div class="grid-container" name="{{ row['user_habits.position'] }}" id="positioncontainer">
+            <div class="grid-item" name="{{ row['habits.name'] }}">
+                <h2 class="goal">
+                    {{ row['habits.descriptionheader1'] }}
+                    {{ row['user_habits.goal'] }}
+                    {{ row['habits.descriptionheader2'] }}
+                </h2>
+                <img src="{{ row['habits.icon_path'] }}/{{ row['habits.name'] }}" alt="{{ row['habits.name'] }}" class="img-fluid" type="image" style="width: 150px; height: 150px;">
+                <div class="current status">
+                    <p> {{ row['habits.descriptionprogress1'] }} </p> 
+                    {{ row['user_habits.progress'] }} 
+                    <p>{{ row['habits.descriptionprogress2'] }}</p> 
+                </div>
+                <p>{{ row['habits.descriptionlogmore'] }}</p> 
+                <input type="number" min="0">
+                <button type="submit">
+                    {{ row['habits.unit'] }} 
+                </button>
             </div>
-
-            <p>How much more did you drink?</p>
-            <input type="number" id="morewater" min="0" step="100">
-            <button type="submit">
-                mililiters
-            </button>
         </div>
-
-        <div class="grid-item" name="workout">
-            <h2 class="goal">
-                Workout 20 minutes today.
-            </h2>
-            <div class="current status">
-                <p> I already worked out </p>
-                <!--get current amount-->
-                <p>minutes today.</p>
-            </div>
-
-            <p>How long was your workout?</p>
-            <input type="number" id="moreworkout" min="1">
-            <button type="submit">
-                minutes
-            </button>
-        </div>
-
-
-        <div class="grid-item" name="read">
-            <h2 class="goal">
-                Read 10 pages in a day.
-            </h2>
-            <div class="current status">
-                <p> I already read </p>
-                <!--get current amount-->
-                <p>pages.</p>
-            </div>
-
-            <p>How many pages did you read?</p>
-            <input type="number" id="morereading" min="0">
-            <button type="submit">
-                pages
-            </button>
-        </div>
-
-
-        <div class="grid-item" name="mediatate">
-            <h2 class="goal">
-                Meditate for 10 minutes.
-            </h2>
-            <div class="current status">
-                <p> I already meditated for  </p>
-                <!--get current amount-->
-                <p>minutes.</p>
-            </div>
-
-            <p>How much more did you meditate?</p>
-            <input type="number" id="morewater" min="0" step="100">
-            <button type="submit">
-                minutes
-            </button>
-        </div>
-
-        <div class="grid-item" name="sleep">
-            <h2 class="goal">
-                Sleep for 7 hours.
-            </h2>
-            <div class="current status">
-                <p>You already slept for</p>
-                <!--get current amount-->
-                <p>hours today.</p>
-            </div>
-
-            <p>How long did you sleep?</p>
-            <input type="number" id="morewater" min="0" step="100">
-            <button type="submit">
-                hours
-            </button>
-        </div>
-
-        <div class="grid-item" name="timeoutside">
-            <h2 class="goal">
-                Spend 30 minutes outside today.
-            </h2>
-            <div class="current status">
-                <p> I already spend </p>
-                <!--get current amount-->
-                <p>minutes outside today.</p>
-            </div>
-
-            <p>How long were you outside?</p>
-            <input type="number" id="morewater" min="0" step="100">
-            <button type="submit">
-                minutes
-            </button>
-        </div>
-    </div>
-
+    {% endfor %}
 {% endblock %}

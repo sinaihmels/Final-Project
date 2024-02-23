@@ -2,6 +2,7 @@ from flask import Flask, flash, render_template, request, session, redirect, url
 from flask_session import Session
 from ssl import AlertDescription
 from security import hash_password, check_password_hash, login_required
+from habbits import setdefault, getdefaultdata, getuserdata
 import sqlite3
 
 app = Flask(__name__) #we initiate the Flask application
@@ -11,6 +12,8 @@ app = Flask(__name__) #we initiate the Flask application
 app.secret_key = b'91e7fb421e04cdb4d42f16860b24000a0018fe6da614105bf088cbd775c06f52'
 # Initialize the Database
 
+# Set the default user in the database 
+# setdefault() This didn't work but I only have to set it once so its best that it didn't work
 
 @app.route('/') #the / is the decorator (what to put into the URL) the / stands for the index page
 def index():
@@ -18,9 +21,18 @@ def index():
         # implement the habits found in the habits table 
         # render_template with the data 
     
+    if session.get("user_id") is None:
     # if session is empty (no one is logged in)
-        # render_template with the default user 
-    return render_template('index.html')
+        # render_template with the data of the default user 
+        rows = getdefaultdata()
+        return render_template('index.html', rows=rows)
+    
+    else:
+        # if there is a user logged in (there is a user_id in session)
+        # render_template with the data from the user
+        user_id = session.get["user_id"]
+        rows = getuserdata(user_id)
+        return render_template('index.html', rows=rows)
 
 
 @app.route("/login", methods=["GET", "POST"])

@@ -10,46 +10,6 @@ username TEXT NOT NULL,
 hash TEXT NOT NULL
 );
 
-CREATE TABLE preferences (
-user_id INTEGER,
-id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-habitA TEXT NOT NULL,
-goalA INTEGER NOT NULL,
-habitB TEXT NOT NULL,
-goalB INTEGER NOT NULL,
-habitC TEXT NOT NULL,
-goalC INTEGER NOT NULL,
-habitD TEXT NOT NULL,
-goalD INTEGER NOT NULL,
-habitE TEXT NOT NULL,
-goalE INTEGER NOT NULL,
-habitF TEXT NOT NULL,
-goalF INTEGER NOT NULL,
-FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
-https://docs.python.org/3/library/sqlite3.html
-
-Here are the default settings 
-
-habits = [
-    {"habit": "water", "goal": "2", "unit": "litres"}
-    {"habit": "workout", "goal": "20", "unit": "minutes"}
-    {"habit": "read", "goal": "10", "unit": "pages"}
-    {"habit": "meditate", "goal": "10", "unit": "minutes"}
-    {"habit": "sleep", "goal": "6", "unit": "hours"}
-    {"habit": "spend time outside", "goal": "30", "unit": "minutes"}
-    {"habit": "eat healthy", "goal": "2", "unit": "meals"}
-    {"habit": "journal", "goal": "10", "unit": "minutes"}
-    {"habit": "clean", "goal": "15", "unit": "minutes"}
-]
-
-Here is the default user of which to create index when no one is logged in 
-    username: default
-    password: 123
-    id: 1
-
-Create the default habits for index 
 CREATE TABLE user_habits (
     user_id INTEGER,
     habits_id INTEGER,
@@ -65,7 +25,7 @@ CREATE TABLE habits (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     name TEXT NOT NULL,
     descriptionheader1 TEXT NOT NULL,
-    default_goal TEXT NOT NULL,
+    default_goal INTEGER NOT NULL,
     descriptionheader2 TEXT NOT NULL,
     icon_path TEXT NOT NULL,
     descriptionprogress1 TEXT NOT NULL,
@@ -74,99 +34,6 @@ CREATE TABLE habits (
     unit TEXT NOT NULL
     );
 
-INSERT INTO habits 
-(name, 
-descriptionheader1, 
-default_goal, 
-descriptionheader2, 
-icon_path, 
-descriptionprogress1, 
-descriptionprogress2, 
-descriptionlogmore, 
-unit) 
-VALUES ('water', 
-'Drink', 
-'2', 
-'litres of water.', 
-'/static/pictures/water', 
-'I already drank', 
-'litres of water.',
-'How much more did you drink?',
-'litres'
-);
+https://docs.python.org/3/library/sqlite3.html
 
-INSERT INTO habits 
-(name, 
-descriptionheader1, 
-default_goal, 
-descriptionheader2, 
-icon_path, 
-descriptionprogress1, 
-descriptionprogress2, 
-descriptionlogmore, 
-unit) 
-VALUES ('workout', 
-'Workout', 
-'20', 
-'minutes today.', 
-'/static/pictures/workout', 
-'I already worked out', 
-'minutes today.',
-'How long was your workout?',
-'minutes'
-);
 
-INSERT INTO habits 
-(name, 
-descriptionheader1, 
-default_goal, 
-descriptionheader2, 
-icon_path, 
-descriptionprogress1, 
-descriptionprogress2, 
-descriptionlogmore, 
-unit) 
-VALUES ('reading', 
-'Read', 
-'10', 
-'pages today.', 
-'/static/pictures/reading', 
-'I already read', 
-'pages today.',
-'How many pages did you read?',
-'pages'
-);
-
-INSERT INTO habits 
-(name, 
-descriptionheader1, 
-default_goal, 
-descriptionheader2, 
-icon_path, 
-descriptionprogress1, 
-descriptionprogress2, 
-descriptionlogmore, 
-unit) 
-VALUES ('meditate', 
-'Meditate for', 
-'10', 
-'minutes today.', 
-'/static/pictures/meditate', 
-'I already meditated for', 
-'minutes today.',
-'How long was your meditation?',
-'minutes'
-);
-        
-### https://docs.python.org/3/library/sqlite3.html#sqlite3-placeholders ###
-
-import sqlite3
-
-con = sqlite3.connect("test.db")
-
-cur = con.cursor()
-
-res = cur.execute("SELECT * from movie")
-
-# fetches the first result row and gets the second column of that row, in this case score
-print(res.fetchone()[2])

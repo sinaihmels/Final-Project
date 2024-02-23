@@ -1,0 +1,228 @@
+Here are the default settings 
+
+habits = [
+    {"habit": "water", "goal": "2", "unit": "litres"}
+    {"habit": "workout", "goal": "20", "unit": "minutes"}
+    {"habit": "read", "goal": "10", "unit": "pages"}
+    {"habit": "meditate", "goal": "10", "unit": "minutes"}
+    {"habit": "sleep", "goal": "6", "unit": "hours"}
+    {"habit": "spend time outside", "goal": "30", "unit": "minutes"}
+    {"habit": "eat healthy", "goal": "2", "unit": "meals"}
+    {"habit": "journal", "goal": "10", "unit": "minutes"}
+    {"habit": "clean", "goal": "15", "unit": "minutes"}
+]
+
+Here is the default user of which to create index when no one is logged in 
+    username: default
+    password: 123
+    id: 1
+
+Create the default habits for index 
+
+
+INSERT INTO habits 
+(name, 
+descriptionheader1, 
+default_goal, 
+descriptionheader2, 
+icon_path, 
+descriptionprogress1, 
+descriptionprogress2, 
+descriptionlogmore, 
+unit) 
+VALUES ('water', 
+'Drink', 
+'2', 
+'litres of water.', 
+'/static/pictures/water', 
+'I already drank', 
+'litres of water.',
+'How much more did you drink?',
+'litres'
+);
+
+INSERT INTO habits 
+(name, 
+descriptionheader1, 
+default_goal, 
+descriptionheader2, 
+icon_path, 
+descriptionprogress1, 
+descriptionprogress2, 
+descriptionlogmore, 
+unit) 
+VALUES ('workout', 
+'Workout', 
+'20', 
+'minutes today.', 
+'/static/pictures/workout', 
+'I already worked out', 
+'minutes today.',
+'How long was your workout?',
+'minutes'
+);
+
+INSERT INTO habits 
+(name, 
+descriptionheader1, 
+default_goal, 
+descriptionheader2, 
+icon_path, 
+descriptionprogress1, 
+descriptionprogress2, 
+descriptionlogmore, 
+unit) 
+VALUES ('reading', 
+'Read', 
+'10', 
+'pages today.', 
+'/static/pictures/reading', 
+'I already read', 
+'pages today.',
+'How many pages did you read?',
+'pages'
+);
+
+INSERT INTO habits 
+(name, 
+descriptionheader1, 
+default_goal, 
+descriptionheader2, 
+icon_path, 
+descriptionprogress1, 
+descriptionprogress2, 
+descriptionlogmore, 
+unit) 
+VALUES ('meditate', 
+'Meditate for', 
+'10', 
+'minutes today.', 
+'/static/pictures/meditate', 
+'I already meditated for', 
+'minutes today.',
+'How long was your meditation?',
+'minutes'
+);
+
+INSERT INTO habits 
+(name, 
+descriptionheader1, 
+default_goal, 
+descriptionheader2, 
+icon_path, 
+descriptionprogress1, 
+descriptionprogress2, 
+descriptionlogmore, 
+unit) 
+VALUES ('sleep', 
+'Sleep for', 
+'10', 
+'hours.', 
+'/static/pictures/sleep', 
+'I already slept for', 
+'hours today.',
+'How long did you sleep?',
+'hours'
+);
+
+INSERT INTO habits 
+(name, 
+descriptionheader1, 
+default_goal, 
+descriptionheader2, 
+icon_path, 
+descriptionprogress1, 
+descriptionprogress2, 
+descriptionlogmore, 
+unit) 
+VALUES ('spend time outside', 
+'Spend', 
+'30', 
+'minutes outside today.', 
+'/static/pictures/outside', 
+'I already spend', 
+'minutes outside today.',
+'How long were you outside?',
+'minutes'
+);
+
+INSERT INTO habits 
+(name, 
+descriptionheader1, 
+default_goal, 
+descriptionheader2, 
+icon_path, 
+descriptionprogress1, 
+descriptionprogress2, 
+descriptionlogmore, 
+unit) 
+VALUES ('eat healthy', 
+'Eat', 
+'2', 
+'healthy meals today.', 
+'/static/pictures/healthy', 
+'I already ate', 
+'healthy meals today.',
+'How many more healthy meals did you eat today?',
+'meals'
+);
+
+
+INSERT INTO habits 
+(name, 
+descriptionheader1, 
+default_goal, 
+descriptionheader2, 
+icon_path, 
+descriptionprogress1, 
+descriptionprogress2, 
+descriptionlogmore, 
+unit) 
+VALUES ('journal',
+'Journal for',
+'10', 
+'minutes today.', 
+'/static/pictures/journal', 
+'I already journaled for', 
+'minutes today.',
+'How many more minutes did you journal today?',
+'minutes'
+);
+
+INSERT INTO habits 
+(name, 
+descriptionheader1, 
+default_goal, 
+descriptionheader2, 
+icon_path, 
+descriptionprogress1, 
+descriptionprogress2, 
+descriptionlogmore, 
+unit) 
+VALUES ('clean',
+'Clean for',
+'15', 
+'minutes today.', 
+'/static/pictures/clean', 
+'I already cleaned for', 
+'minutes today.',
+'How many more minutes did you clean today?',
+'minutes'
+);
+
+
+SELECT 
+    user_habits.position,
+    habits.name,
+    habits.descriptionheader1,
+    user_habits.goal, 
+    habits.descriptionheader2,
+    habits.icon_path,
+    habits.descriptionprogress1,
+    user_habits.progress, 
+    habits.descriptionprogress2,
+    habits.descriptionlogmore,
+    habits.unit  
+FROM user_habits 
+JOIN habits ON user_habits.habits_id=habits.id 
+WHERE user_id = 1;
