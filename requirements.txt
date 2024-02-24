@@ -13,12 +13,12 @@ hash TEXT NOT NULL
 CREATE TABLE user_habits (
     user_id INTEGER,
     habits_id INTEGER,
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     progress INTEGER NOT NULL,
     goal INTEGER NOT NULL,
     position INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (habits_id) REFERENCES habits(id)
+    FOREIGN KEY (habits_id) REFERENCES habits(id),
+    PRIMARY KEY (user_id, habits_id)
     );
 
 CREATE TABLE habits (

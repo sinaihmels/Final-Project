@@ -51,7 +51,7 @@ footer {
 
 .topnav{
     overflow: hidden;
-    background-color: #c28d75;
+    background-color: #F6F3EE;
     font-family: Arial, Helvetica, sans-serif;
     font-size: medium;
 }
@@ -60,7 +60,7 @@ footer {
 .topnav a {
 float: right;
 display: block;
-color: #472c1f;
+color: #666092;
 text-align: center;
 padding: 14px 40px;
 text-decoration: none;
@@ -120,11 +120,66 @@ color: #120b08;
     font-size: large;
     background-color: #9a9a97;
 }
-.container {
-background-color: #9a9a97;
-padding: 1px 16px;
+.containersettings {
+    background-color: #9a9a97;
+    padding: 1px 16px;
+    margin-left: 8%;
+    padding: 3px 16px;
+    height: auto;
 }
 
 #savechangesbutton {
     background-color: #6f6776;
+}
+
+.button {
+    background-color: #c99983;
+    color:#120b08;
+    height: 10%;
+    width: 20%;
+    font-size: small;
+    box-sizing: border-box;
+    border-style: hidden;
+    border-radius: 20px;
+}
+
+.col {
+    background-color: #F6F3EE;
+    color: #120b08;
+    padding: 10px;
+    margin: 0.5%; /* Add margin to the columns */
+    width: calc(33.33% - 2* 10px - 2* 1%);
+    block-size: auto;
+    border-style: solid;
+    border-radius: 8% 30%;
+    border-color: #666092;
+}
+
+.goal {
+    padding: 2%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 200%;
+}
+
+/* Adjust input and button styling */
+input[type="number"],
+button {
+    box-sizing: border-box;
+    background-color: white;
+    width: calc(100% - 2 * 10px); /* Adjust width to account for padding */
+    margin: 5px;
+    padding: 5px;
+}
+
+/* Ensure three columns per row */
+@media (max-width: 992px) {
+    .col {
+        width: calc(50% - 2 * 10px - 2 * 1%); /* Adjust width for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .col {
+        width: calc(100% - 2 * 10px - 2 * 1%); /* Full width on smaller screens */
+    }
 }

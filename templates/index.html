@@ -1,30 +1,32 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Home
+Home
 {% endblock %}
 
 {% block main %}
-    {% for row in rows %}
-        <div class="grid-container" name="{{ row['user_habits.position'] }}" id="positioncontainer">
-            <div class="grid-item" name="{{ row['habits.name'] }}">
-                <h2 class="goal">
-                    {{ row['habits.descriptionheader1'] }}
-                    {{ row['user_habits.goal'] }}
-                    {{ row['habits.descriptionheader2'] }}
-                </h2>
-                <img src="{{ row['habits.icon_path'] }}/{{ row['habits.name'] }}" alt="{{ row['habits.name'] }}" class="img-fluid" type="image" style="width: 150px; height: 150px;">
-                <div class="current status">
-                    <p> {{ row['habits.descriptionprogress1'] }} </p> 
-                    {{ row['user_habits.progress'] }} 
-                    <p>{{ row['habits.descriptionprogress2'] }}</p> 
-                </div>
-                <p>{{ row['habits.descriptionlogmore'] }}</p> 
-                <input type="number" min="0">
-                <button type="submit">
-                    {{ row['habits.unit'] }} 
-                </button>
+<p></p>
+<div class="container text-center"  id="containerindex" >
+    <div class="row row-cols-3">
+
+        {% for row in rows %}
+        <div class="col" name="{{ row['habits.name'] }}">
+            <div class="goal">
+                {{ row['habits.descriptionheader1'] }}
+                {{ row['user_habits.goal'] }}
+                {{ row['habits.descriptionheader2'] }}
             </div>
+            <img src="{{ row['habits.icon_path'] }}/{{ row['habits.name'] }}" alt="{{ row['habits.name'] }}"
+                class="img-fluid" type="image" style="width: 150px; height: 150px;">
+                <p></p>
+            <div class="current status">
+                <p>{{ row['habits.descriptionprogress1'] }} {{ row['user_habits.progress'] }} {{ row['habits.descriptionprogress2'] }}</p>
+            </div>
+            <p>{{ row['habits.descriptionlogmore'] }}</p>
+            <input type="number" min="0" class="input">
+            <button type="submit" class="button" value="submit">{{row['habits.unit']}}</button>
         </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

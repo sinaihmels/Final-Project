@@ -18,23 +18,40 @@
         </a>
     </ul>
 
-    <form action="/settingsuser" method="post">
-        <div class="container" style="margin-left:8%; padding:3px 16px; height:600x;">
+    <form action="/settingsmh" method="post">
+        <div class="containersettings">
             <h2>Update your habit settings:</h2>
-            <p></p>
         
-            <div>Select the six habits you want to track</div>
-            <div class="mb-3">
-                <!--checkboxes-->
-            </div>
+            <p>Select at least one and up to six habits you want to track</p>
+                <input type="checkbox" name="habit" value="water" {% for row in rows %}{% if row['habits.name'] == "water" %} checked {% endif %}{% endfor %}>
+                    <label for="habit">Water</label>
+                <input type="checkbox" name="habit" value="workout" {% for row in rows %}{% if row['habits.name'] == "workout" %} checked {% endif %}{% endfor %}>
+                    <label for="habit">Workout</label>
+                <input type="checkbox" name="habit" value="reading" {% for row in rows %}{% if row['habits.name'] == "reading" %} checked {% endif %}{% endfor %}>
+                    <label for="habit">Reading</label>
+                <input type="checkbox" name="habit" value="meditate" {% for row in rows %}{% if row['habits.name'] == "meditate" %} checked {% endif %}{% endfor %}>
+                    <label for="habit">Meditate</label>
+                <input type="checkbox" name="habit" value="sleep" {% for row in rows %}{% if row['habits.name'] == "sleep" %} checked {% endif %}{% endfor %}>
+                    <label for="habit">Sleep</label>
+                <input type="checkbox" name="habit" value="spend time outside" {% for row in rows %}{% if row['habits.name'] == "spend time outside" %} checked {% endif %}{% endfor %}>
+                    <label for="habit">Time outside</label>
+                <input type="checkbox" name="habit" value="eat healthy" {% for row in rows %}{% if row['habits.name'] == "eat healthy" %} checked {% endif %}{% endfor %}>
+                    <label for="habit">Eat healthy</label>
+                <input type="checkbox" name="habit" value="journal" {% for row in rows %}{% if row['habits.name'] == "journal" %} checked {% endif %}{% endfor %}>
+                    <label for="habit">Journal</label>
+                <input type="checkbox" name="habit" value="clean" {% for row in rows %}{% if row['habits.name'] == "clean" %} checked {% endif %}{% endfor %}>
+                    <label for="habit">Clean</label>
+                <button type="submit" value="checkedhabits" name="checkedhabits">Submit</button>
             <p></p>
 
-            <div>Select the goals for your habits</div>
-            <div class="mb-3">
-            </div>
-            <div>
-                <button class="btn btn-primary" id="updatehabits" type="submit">Update habits</button>
-            </div>
+            <p>Select the goals for your habits</p>
+            {% for row in rows %}
+                <p>Change the goals for the habits</p>
+                <p></p>
+                <p>habit: {{ row['habits.name'] }} goal: {{ row['user_habits.goal']}} {{ row['habits.unit'] }}</p>
+                <input type="number" placeholder="What's your new goal?">
+                <button type="submit" value="{{ row['habits.name']}}button">Set new goal</button>
+            {% endfor %}
         </div>
     </form>
 {% endblock %}

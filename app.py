@@ -2,7 +2,8 @@ from flask import Flask, flash, render_template, request, session, redirect, url
 from flask_session import Session
 from ssl import AlertDescription
 from security import hash_password, check_password_hash, login_required
-from habbits import setdefault, getdefaultdata, getuserdata
+from habits import setdefault, getdefaultdata, getuserdata, setuser_habits
+from settings import getuserdata_settings
 import sqlite3
 
 app = Flask(__name__) #we initiate the Flask application
@@ -30,7 +31,7 @@ def index():
     else:
         # if there is a user logged in (there is a user_id in session)
         # render_template with the data from the user
-        user_id = session.get["user_id"]
+        user_id = session["user_id"]
         rows = getuserdata(user_id)
         return render_template('index.html', rows=rows)
 
@@ -164,10 +165,37 @@ def settingsuser():
     return redirect("/settingsuser")
                 
 
-@app.route("/settingsmh")
+@app.route("/settingsmh", methods= ["GET", "POST"])
 @login_required
 def settingsmh():
-    return render_template("settingsmh.html")
+    if request.method == "GET":
+        user_id = session["user_id"]
+        rows = getuserdata_settings(user_id=user_id)
+        return render_template("settingsmh.html", rows=rows)
+    
+    if request.method == "POST":
+        # if the submit button to select the habbits is submitted 
+        if request.form.get("habit"):
+            # get a list of the checked checkboxes from the form
+            checked_habits = request.form.getlist('habit')
+            print(checked_habits)
+            
+            # iterate over the list and validate the input
+            if len(checked_habits) is None:
+                flash("403: Must check at least one habit", "error")
+                user_id = session["user_id"]
+                rows = getuserdata_settings(user_id=user_id)
+                return render_template("settingsmh.html", rows=rows)
+            
+
+            # if not 6 habits are checked return flash 
+             # check that 6 habits are checked 
+                # update user_settings so that when the page reloads the correct habits are displayed 
+
+        user_id = session["user_id"]
+        rows = getuserdata_settings(user_id=user_id)
+        return render_template("settingsmh.html", rows=rows)
+
 
 @app.route("/settingsdesign")
 @login_required
@@ -187,6 +215,11 @@ def register():
             username = request.form.get("username")
 
             # I'm missing checking if the username is already used
+
+            existing_user = cur.execute("SELECT id FROM users WHERE username = ?", (username,)).fetchone()
+            if existing_user:
+                flash("403: Username already exists. Please choose another one.", "error")
+                return render_template("register.html")
             
             if not request.form.get("password"):
                 flash("403: Must input a password", "error")
@@ -209,13 +242,17 @@ def register():
             )
             # Input the username and the hashed password into the table users 
             cur.execute("INSERT INTO users (username, hash) VALUES(:username, :hash)", data)
+            con.commit()
 
             user = cur.execute("SELECT id FROM users WHERE username = ?", (username,))
-    
+            user_id = user.fetchone()[0]
             # log the user in
-            session["user_id"] = user.fetchone()[0]
-            con.commit()
+            session["user_id"] = user_id
             
+
+            # set the user_habits to the default habits settings 
+            setuser_habits(con, cur, user_id)
+     
             # redirect to index
             flash("You were successfully logged in.", "success")
             return redirect("/")
