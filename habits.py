@@ -50,7 +50,7 @@ def getdefaultdata():
     with sqlite3.connect("database.db") as con:
         # Get the data from the default user and store them within data
         cur = con.cursor()
-        cur.execute("SELECT user_habits.position, habits.name, habits.descriptionheader1, user_habits.goal, habits.descriptionheader2, habits.icon_path, habits.descriptionprogress1, user_habits.progress, habits.descriptionprogress2, habits.descriptionlogmore, habits.unit FROM user_habits JOIN habits ON user_habits.habits_id=habits.id WHERE user_id = 1;")
+        cur.execute("SELECT user_habits.position, habits.name, habits.descriptionheader1, user_habits.goal, habits.descriptionheader2, habits.icon_path, habits.descriptionprogress1, user_habits.progress, habits.descriptionprogress2, habits.descriptionlogmore, habits.unit, habits.id FROM user_habits JOIN habits ON user_habits.habits_id=habits.id WHERE user_id = 1;")
         rows = cur.fetchall()
         # Define a list to store the dicionaries 
         default_data = []
@@ -68,7 +68,8 @@ def getdefaultdata():
                 "user_habits.progress": row[7],
                 "habits.descriptionprogress2": row[8],
                 "habits.descriptionlogmore": row[9],
-                "habits.unit": row[10]
+                "habits.unit": row[10],
+                "habits.id": row[11]
             }
             default_data.append(data_dict)
         return default_data
@@ -80,7 +81,7 @@ def getuserdata(user_id):
     with sqlite3.connect("database.db") as con:
         # Get the data from the default user and store them within data
         cur = con.cursor()
-        cur.execute("SELECT user_habits.position, habits.name, habits.descriptionheader1, user_habits.goal, habits.descriptionheader2, habits.icon_path, habits.descriptionprogress1, user_habits.progress, habits.descriptionprogress2, habits.descriptionlogmore, habits.unit FROM user_habits JOIN habits ON user_habits.habits_id=habits.id WHERE user_id = ?", (user_id,))
+        cur.execute("SELECT user_habits.position, habits.name, habits.descriptionheader1, user_habits.goal, habits.descriptionheader2, habits.icon_path, habits.descriptionprogress1, user_habits.progress, habits.descriptionprogress2, habits.descriptionlogmore, habits.unit, habits.id FROM user_habits JOIN habits ON user_habits.habits_id=habits.id WHERE user_id = ?", (user_id,))
         rows = cur.fetchall()
         # Define a list to store the dicionaries 
         user_data = []
@@ -98,7 +99,25 @@ def getuserdata(user_id):
                 "user_habits.progress": row[7],
                 "habits.descriptionprogress2": row[8],
                 "habits.descriptionlogmore": row[9],
-                "habits.unit": row[10]
+                "habits.unit": row[10],
+                "habits.id": row[11]
             }
             user_data.append(data_dict)
         return user_data
+    
+def update_progress(user_id, habits_id, newprogress):
+    with sqlite3.connect("database.db") as con:
+        cur = con.cursor()
+        # Get current progress
+        cur.execute("SELECT progress FROM user_habits WHERE user_id = ? AND habits_id = ?", (user_id, habits_id))
+        currentprogress = cur.fetchone()
+        if currentprogress is None: 
+            currentprogress = 0
+        currentprogress = int(currentprogress[0])
+        newprogress = int(newprogress)
+        # Add the former progress to the newprogress
+        newprogress = currentprogress + newprogress
+        print(f"newprogress with current: %", newprogress)
+        # Update the data
+        cur.execute("UPDATE user_habits SET progress = ? WHERE user_id = ? AND habits_id = ?", (newprogress, user_id, habits_id))
+        return True

@@ -23,8 +23,11 @@ Home
                 <p>{{ row['habits.descriptionprogress1'] }} {{ row['user_habits.progress'] }} {{ row['habits.descriptionprogress2'] }}</p>
             </div>
             <p>{{ row['habits.descriptionlogmore'] }}</p>
-            <input type="number" min="0" class="input">
-            <button type="submit" class="button" value="submit">{{row['habits.unit']}}</button>
+            <form action="/" method="post">
+                <input type="hidden" name="habits_id" value="{{ row['habits.id']}}">
+                <input type="number" min="0" class="input" name="progresslogged">
+                <button type="submit" class="button" value="submit">{{row['habits.unit']}}</button>
+            </form>
         </div>
         {% endfor %}
     </div>

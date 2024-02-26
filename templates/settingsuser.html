@@ -7,19 +7,16 @@
 {% block main %}
     <h2 class="settingheader">Settings</h2>
     <ul class="verticalnavbar">
-        <a href="/settingsuser" class="verticalnavbarelement" id="chosenelement">
-            <img src="/static/settings/user.png" width="20px" height="20px">User
+        <a href="/settingsmh" >
+            <img src="/static/settings/MH.jpg" width="20px" height="20px"> Habits
         </a>
-        <a href="/settingsmh">
-            <img src="/static/settings/MH.jpg" width="20px" height="20px">Habits
-        </a>
-        <a href="/settingsdesktop" class="vertical navbar element">
-            <img src="/static/settings/desktop.png" width="20px" height="20px">Design
+        <a href="/settingsuser" id="chosenelement">
+            <img src="/static/settings/user.png" width="20px" height="20px"> User
         </a>
     </ul>
 
     <form action="/settingsuser" method="post">
-        <div class="containersettings" style="margin-left:8%; padding:3px 16px; height:600x;">
+        <div class="containersettings">
             <h2>Update your user settings:</h2>
             <p></p>
         

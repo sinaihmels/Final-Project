@@ -2,8 +2,8 @@ from flask import Flask, flash, render_template, request, session, redirect, url
 from flask_session import Session
 from ssl import AlertDescription
 from security import hash_password, check_password_hash, login_required
-from habits import setdefault, getdefaultdata, getuserdata, setuser_habits
-from settings import getuserdata_settings
+from habits import setdefault, getdefaultdata, getuserdata, setuser_habits, update_progress
+from settings import getuserdata_settings, changehabits, update_goal
 import sqlite3
 
 app = Flask(__name__) #we initiate the Flask application
@@ -16,24 +16,45 @@ app.secret_key = b'91e7fb421e04cdb4d42f16860b24000a0018fe6da614105bf088cbd775c06
 # Set the default user in the database 
 # setdefault() This didn't work but I only have to set it once so its best that it didn't work
 
-@app.route('/') #the / is the decorator (what to put into the URL) the / stands for the index page
+@app.route('/', methods=["GET", "POST"]) #the / is the decorator (what to put into the URL) the / stands for the index page
 def index():
     # if the session is not empty
         # implement the habits found in the habits table 
         # render_template with the data 
+    if request.method == "GET":
+        if session.get("user_id") is None:
+        # if session is empty (no one is logged in)
+            # render_template with the data of the default user 
+            rows = getdefaultdata()
+            return render_template('index.html', rows=rows)
+        
+        else:
+            # if there is a user logged in (there is a user_id in session)
+            # render_template with the data from the user
+            user_id = session["user_id"]
+            rows = getuserdata(user_id)
+            return render_template('index.html', rows=rows)
     
-    if session.get("user_id") is None:
-    # if session is empty (no one is logged in)
-        # render_template with the data of the default user 
-        rows = getdefaultdata()
-        return render_template('index.html', rows=rows)
-    
-    else:
-        # if there is a user logged in (there is a user_id in session)
-        # render_template with the data from the user
-        user_id = session["user_id"]
-        rows = getuserdata(user_id)
-        return render_template('index.html', rows=rows)
+    if request.method == "POST": 
+        if (request.form.get("habits_id")) is not None:
+                user_id = session["user_id"]
+                habits_id = request.form.get("habits_id")
+                newprogress = request.form.get("progresslogged")
+                if request.form.get("progresslogged") is None:
+                    flash("403: Must input a positive number", "error")
+            
+
+                if update_progress(user_id=user_id, habits_id=habits_id, newprogress=newprogress) is True:
+                    flash("Good job!", "success")
+                    user_id = session["user_id"]
+                    rows = getuserdata(user_id)
+                    return render_template('index.html', rows=rows)
+                else: 
+                    flash("403: Error", "error")
+                    user_id = session["user_id"]
+                    rows = getuserdata(user_id)
+                    return render_template('index.html', rows=rows)
+
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -84,17 +105,6 @@ def logout():
     flash("You were successfully logged out.", "success")
     # redirect to index
     return render_template("index.html")
-
-    
-
-
-
-@app.route("/settings", methods=["GET", "POST"])
-@login_required
-def settings():
-    return render_template('settings.html')
-    #write the settings function
-
 
 
 @app.route("/settingsuser", methods= ["GET", "POST"])
@@ -175,32 +185,48 @@ def settingsmh():
     
     if request.method == "POST":
         # if the submit button to select the habbits is submitted 
-        if request.form.get("habit"):
+        if (request.form.get("checkedhabits")) is not None:
             # get a list of the checked checkboxes from the form
+            user_id = session["user_id"]
+            rows = getuserdata_settings(user_id=user_id)
             checked_habits = request.form.getlist('habit')
-            print(checked_habits)
-            
-            # iterate over the list and validate the input
-            if len(checked_habits) is None:
+
+            # if no checkbox was checked return an error
+            if not checked_habits: 
                 flash("403: Must check at least one habit", "error")
+                return render_template("settingsmh.html", rows=rows)
+            
+            # if more than 6 checkboxes were checked return an error
+            elif len(checked_habits) > 6:
+                flash("403: Cannot select more than 6 habits", "error")
+                return render_template("settingsmh.html", rows=rows)
+            
+            # if the input is approved use the function changehabits to change the habits within the database for the user
+            else: 
+                if changehabits(user_id=user_id, checked_habits=checked_habits) is True:
+                    flash("Your selection of habits was updated", "success")
+                    user_id = session["user_id"]
+                    rows = getuserdata_settings(user_id=user_id)
+                    return render_template("settingsmh.html", rows=rows)
+
+            user_id = session["user_id"]
+            rows = getuserdata_settings(user_id=user_id)
+            return render_template("settingsmh.html", rows=rows)
+
+        if (request.form.get("habits_id")) is not None:
+            user_id = session["user_id"]
+            habits_id = request.form.get("habits_id")
+            newgoal = request.form.get("newgoal")
+
+            if update_goal(habits_id=habits_id, newgoal=newgoal, user_id=user_id) is True:
+                flash("Your goal has been updated", "success")
                 user_id = session["user_id"]
                 rows = getuserdata_settings(user_id=user_id)
                 return render_template("settingsmh.html", rows=rows)
-            
-
-            # if not 6 habits are checked return flash 
-             # check that 6 habits are checked 
-                # update user_settings so that when the page reloads the correct habits are displayed 
 
         user_id = session["user_id"]
         rows = getuserdata_settings(user_id=user_id)
         return render_template("settingsmh.html", rows=rows)
-
-
-@app.route("/settingsdesign")
-@login_required
-def settingsdesign():
-    return render_template("settingsdesign.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
