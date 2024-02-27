@@ -28,68 +28,89 @@
 */
 
 body {
-    background-color: #F6F3EE;
-    font-family: "Arial", "Helvetica", sans-serif;
+    background-color: #FAF7FF;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: small;
-    background-image: url("/static/background.jpg");
     background-size: cover;
-    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    flex-direction: column;
 }
 
-header {
-    font-family: "Arial", "Helvetica", sans-serif;
-    text-align: start;
-    font-size: large;
-    color: #c99983;
+
+.input{
+    width: 25%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #666092;
+    border-radius: 4px;
+    box-sizing: 15%;
 }
 
-footer {
-    display: block;
-    font-family: "Arial", "Helvetica", sans-serif;
+.input2 {
+    width: 25%;
+    padding: 12px 12px;
+    margin: 2px 8px;
+    display: inline-block;
+    border: 1px solid #666092;
+    border-radius: 4px;
+    box-sizing: 15%;
+    padding-right: 10px;
+}
+
+.input3 {
+    width: 25%;
+    padding: 12px 12px;
+    margin: 2px 8px;
+    display: inline-block;
+    border: 1px solid #666092;
+    border-radius: 4px;
+    box-sizing: 15%;
+    padding-right: 10px;
+    align-self:self-start;
+}
+
+.mb-3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 10px;
+    margin-top: auto;
 }
 
 .topnav{
     overflow: hidden;
-    background-color: #F6F3EE;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: medium;
 }
 
 
 .topnav a {
-float: right;
-display: block;
-color: #666092;
-text-align: center;
-padding: 14px 40px;
-text-decoration: none;
+    float: right;
+    display: block;
+    color: #666092;
+    text-align: center;
+    padding: 14px 40px;
+    text-decoration: none;
 }
 
 .topnav a:hover {
-background-color: #c99983;
-color: #120b08;
+    background-color: #CE8681;
+    color: #474554;
 }
 
-.grid-container {
-    display: grid;
-    gap: 10px;
-    grid-template-columns: auto auto auto;
-    padding: 10px;
-    grid-auto-columns: max-content;
-}
-  
-.grid-item {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
+.container {
+    align-self: center;
 }
 
 .verticalnavbar{
-    background-color: #c28d75;
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: #CE8681;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: medium;
     list-style-type: none;
     margin: 0;
@@ -101,15 +122,15 @@ color: #120b08;
 
 
 .verticalnavbar a {
-display: block;
-color: #472c1f;
-padding: 8px 20px;
-text-decoration: none;
-}
+    display: block;
+    color: #474554;
+    padding: 8px 20px;
+    text-decoration: none;
+    }
 
 .verticalnavbar a:hover {
-background-color: #c99983;
-color: #120b08;
+    background-color: #CE8681;
+    color: #474554;
 }
 
 .settingheader {
@@ -118,34 +139,66 @@ color: #120b08;
 
 #chosenelement {
     font-size: large;
-    background-color: #9a9a97;
+    background-color: #ACA9BB;
 }
 .containersettings {
-    background-color: #9a9a97;
+    background-color: #ACA9BB;
     padding: 1px 16px;
     margin-left: 10%;
     padding: 3px 16px;
     height: auto;
 }
 
-#savechangesbutton {
-    background-color: #6f6776;
-}
-
 .button {
-    background-color: #c99983;
-    color:#120b08;
+    background-color: #CE8681;
+    color:#474554;
     height: 10%;
     width: 20%;
-    font-size: small;
+    font-size: 1.1vw;
     box-sizing: border-box;
     border-style: hidden;
     border-radius: 20px;
 }
 
+.button2 {
+    background-color: #CE8681;
+    color:#474554;
+    height: 13%;
+    width: 20%;
+    font-size: 1.1vw;
+    box-sizing: border-box;
+    border-style: hidden;
+    border-radius: 20px;
+}
+
+.button3 {
+    background-color: #CE8681;
+    color:#474554;
+    height: 13%;
+    width: 20%;
+    font-size: 1.1vw;
+    box-sizing: border-box;
+    border-style: hidden;
+    border-radius: 20px;
+    margin-left: 7px;
+}
+
+.button4 {
+    background-color: #CE8681;
+    color:#474554;
+    height: 13%;
+    width: 20%;
+    font-size: 1.1vw;
+    box-sizing: border-box;
+    border-style: hidden;
+    border-radius: 20px;
+    margin-left: 7px;
+    align-self: center;
+}
+
 .col {
-    background-color: #F6F3EE;
-    color: #120b08;
+    background-color: #FAF7FF;
+    color: #474554;
     padding: 15px;
     margin: 0.5%; /* Add margin to the columns */
     width: calc(33.33% - 2* 10px - 2* 1%);
@@ -157,20 +210,11 @@ color: #120b08;
 
 .goal {
     padding: 3%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 200%;
     block-size: auto;
 }
 
-/* Adjust input and button styling */
-input[type="number"],
-button {
-    box-sizing: border-box;
-    background-color: white;
-    width: calc(100% - 2 * 10px); /* Adjust width to account for padding */
-    margin: 5px;
-    padding: 5px;
-}
 
 hr {
     display: block;
@@ -181,6 +225,47 @@ hr {
     border-style: inset;
     border-width: 1px;
   }
+
+.h2 {
+    font-size:2.8vw;
+    color: #474554;
+    text-align: center;
+}
+
+.description {
+    font-size:1.5vw;
+    color:#474554;
+}
+
+.checkbox {
+    font-size: 1.1vw;
+    color: #474554;
+}
+
+.login {
+    display: block;
+    align-self: center;
+    padding: 100px;
+    margin-top: auto;
+}
+
+.register {
+    display: block;
+    align-self: center;
+    padding: 100px;
+    margin-top: auto;
+    
+}
+
+.smalltext {
+    font-size: 1.1vw;
+    color: #474554;
+}
+
+.row-col-3 {
+    width:auto;
+    align-self: center;
+}
 
 /* Ensure three columns per row */
 @media (max-width: 992px) {

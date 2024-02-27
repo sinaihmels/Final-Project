@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block main %}
-    <h2 class="settingheader">Settings</h2>
     <ul class="verticalnavbar">
         <a href="/settingsmh" >
             <img src="/static/settings/MH.jpg" width="20px" height="20px"> Habits
@@ -17,29 +16,32 @@
 
     <form action="/settingsuser" method="post">
         <div class="containersettings">
-            <h2>Update your user settings:</h2>
+            <p class="h2">Update your user settings:</p>
             <p></p>
         
-            <div>To change your username write a new username and click "Update username" to save the new username</div>
+            <p class="description">To change your username write a new username and click "Update username" to save the new username</p>
             <div class="mb-3">
-                <input class="form-control mx-auto w-auto" autocomplete="off" autofocus name="username" placeholder="New username" type="text">
+                <input class="input2" autocomplete="off" autofocus name="username" placeholder="New username" type="text">
+            </div>
+            <div class="mb-3">
+                <button class="button4" id="updateusername" type="submit" name="option1">Update username</button>
             </div>
             <p></p>
 
-            <div>To change your password input your current password and then your new password two times. To save the new password click "Update password".</div>
+            <p class="description">To change your password input your current password and then your new password two times. To save the new password click "Update password".</p>
             <div class="mb-3">
-                <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
-            </div>
-            <div class="mb-3">
-                <input class="form-control mx-auto w-auto" name="new_password" placeholder="New Password" type="password">
+                <input class="input2" name="password" placeholder="Password" type="password">
             </div>
             <div class="mb-3">
-               <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Confirm New password" type="password">
+                <input class="input2" name="new_password" placeholder="New Password" type="password">
             </div>
-            <div>
-                <button class="btn btn-primary" id="updateusername" type="submit" name="option1">Update username</button>
-                <button class="btn btn-primary" id="updatepassword" type="submit" name="option2">Update password</button>
+            <div class="mb-3">
+                <input class="input2" name="confirmation" placeholder="Confirm New password" type="password">
             </div>
+            <div class="mb-3">
+                <button class="button4" id="updatepassword" type="submit" name="option2">Update password</button>
+            </div>
+            <p></p>
         </div>
     </form>
 {% endblock %}

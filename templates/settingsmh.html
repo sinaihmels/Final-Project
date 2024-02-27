@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block main %}
-    <h2 class="settingheader">Settings</h2>
     <ul class="verticalnavbar">
         <a href="/settingsmh" id="chosenelement">
             <img src="/static/settings/MH.jpg" width="20px" height="20px"> Habits
@@ -17,39 +16,40 @@
     <div class="containersettings">
         <form action="/settingsmh" method="post">
 
-            <h2>Update your habit settings:</h2>
+            <p class="h2">Update your habit settings:</p>
         
-            <p>Select at least one and up to six habits you want to track</p>
-                <input type="checkbox" name="habit" value="water">
-                    <label for="habit">Water</label>
-                <input type="checkbox" name="habit" value="workout">
-                    <label for="habit">Workout</label>
-                <input type="checkbox" name="habit" value="reading">
-                    <label for="habit">Reading</label>
-                <input type="checkbox" name="habit" value="meditate">
-                    <label for="habit">Meditate</label>
-                <input type="checkbox" name="habit" value="sleep">
-                    <label for="habit">Sleep</label>
-                <input type="checkbox" name="habit" value="spend time outside">
-                    <label for="habit">Time outside</label>
-                <input type="checkbox" name="habit" value="eat healthy">
-                    <label for="habit">Eat healthy</label>
-                <input type="checkbox" name="habit" value="journal">
-                    <label for="habit">Journal</label>
-                <input type="checkbox" name="habit" value="clean">
-                    <label for="habit">Clean</label>
-                <button type="submit" value="checkedhabits" name="checkedhabits">Submit</button>
+            <p class="description">Select at least one and up to six habits you want to track</p>
+                <input class="form-check-input" type="checkbox" name="habit" value="water">
+                    <label class="checkbox" for="habit">Water </label>
+                <input class="form-check-input" type="checkbox" name="habit" value="workout">
+                    <label class="checkbox" for="habit">Workout </label>
+                <input class="form-check-input" type="checkbox" name="habit" value="reading">
+                    <label class="checkbox" for="habit">Reading </label>
+                <input class="form-check-input" type="checkbox" name="habit" value="meditate">
+                    <label class="checkbox" for="habit">Meditate </label>
+                <input class="form-check-input" type="checkbox" name="habit" value="sleep">
+                    <label class="checkbox" for="habit">Sleep </label>
+                <input class="form-check-input" type="checkbox" name="habit" value="spend time outside">
+                    <label class="checkbox" for="habit">Time outside </label>
+                <input class="form-check-input" type="checkbox" name="habit" value="eat healthy">
+                    <label class="checkbox" for="habit">Eat healthy </label>
+                <input class="form-check-input" type="checkbox" name="habit" value="journal">
+                    <label class="checkbox" for="habit">Journal </label>
+                <input class="form-check-input" type="checkbox" name="habit" value="clean">
+                    <label class="checkbox" for="habit">Clean </label>
+
+                <button class="button3" type="submit" value="checkedhabits" name="checkedhabits">Submit</button>
             <p></p>
         </form>
 
-            <h2>Select the goals for your habits:</h2>
+            <p class="h2">Select the goals for your habits:</p>
             {% for row in rows %}
                 <form action="/settingsmh" method="post"> 
-                    <p>{{ row['habits.descriptionheader1'] }} {{ row['user_habits.goal']}} {{ row['habits.descriptionheader2'] }}</p>
-                    <p>Your current goal is: {{ row['user_habits.goal']}} {{ row['habits.unit'] }}</p>
+                    <p class="smalltext">{{ row['habits.descriptionheader1'] }} {{ row['user_habits.goal']}} {{ row['habits.descriptionheader2'] }}</p>
+                    <p class="smalltext">Your current goal is: {{ row['user_habits.goal']}} {{ row['habits.unit'] }}</p>
                     <input type="hidden" name="habits_id" value="{{ row['user_habits.habits_id']}}">
-                    <input type="number" placeholder="What's your new goal?" name="newgoal">
-                    <button type="submit" value="newgoal" id="newgoal{{ row['user_habits.habits_id']}}">Set new goal</button>
+                    <input class="input2" type="number" placeholder="What's your new goal?" name="newgoal">
+                    <button class="button2" type="submit" value="newgoal" id="newgoal{{ row['user_habits.habits_id']}}">Set new goal</button>
                     <hr>
                 </form>
             {% endfor %}

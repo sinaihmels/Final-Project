@@ -7,29 +7,32 @@ Home
 {% block main %}
 <p></p>
 <div class="container text-center"  id="containerindex" >
-    <div class="row row-cols-3">
+    <div class="row justify-content-md-center">
+        <div class="row row-cols-3">
 
-        {% for row in rows %}
-        <div class="col" name="{{ row['habits.name'] }}">
-            <div class="goal">
-                {{ row['habits.descriptionheader1'] }}
-                {{ row['user_habits.goal'] }}
-                {{ row['habits.descriptionheader2'] }}
-            </div>
-            <img src="{{ row['habits.icon_path'] }}/{{ row['habits.name'] }}" alt="{{ row['habits.name'] }}"
-                class="img-fluid" type="image" style="width: 150px; height: 150px;">
+            {% for row in rows %}
+            <div class="col" name="{{ row['habits.name'] }}">
+                <div class="goal">
+                    {{ row['habits.descriptionheader1'] }}
+                    {{ row['user_habits.goal'] }}
+                    {{ row['habits.descriptionheader2'] }}
+                </div>
                 <p></p>
-            <div class="current status">
-                <p>{{ row['habits.descriptionprogress1'] }} {{ row['user_habits.progress'] }} {{ row['habits.descriptionprogress2'] }}</p>
+                <img src="{{ row['habits.icon_path'] }}/{{ row['habits.name'] }}" alt="{{ row['habits.name'] }}"
+                    class="img-fluid" type="image" style="width: 150px; height: 150px;">
+                    <p></p>
+                <div class="current status">
+                    <p class="smalltext">{{ row['habits.descriptionprogress1'] }} {{ row['user_habits.progress'] }} {{ row['habits.descriptionprogress2'] }}</p>
+                </div>
+                <p class="smalltext">{{ row['habits.descriptionlogmore'] }}</p>
+                <form action="/" method="post">
+                    <input type="hidden" name="habits_id" value="{{ row['habits.id']}}">
+                    <input type="number" min="0" class="input" name="progresslogged">
+                    <button type="submit" class="button" value="submit">{{row['habits.unit']}}</button>
+                </form>
             </div>
-            <p>{{ row['habits.descriptionlogmore'] }}</p>
-            <form action="/" method="post">
-                <input type="hidden" name="habits_id" value="{{ row['habits.id']}}">
-                <input type="number" min="0" class="input" name="progresslogged">
-                <button type="submit" class="button" value="submit">{{row['habits.unit']}}</button>
-            </form>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
 {% endblock %}
