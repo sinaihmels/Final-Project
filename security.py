@@ -1,4 +1,3 @@
-from ssl import AlertDescription
 import bcrypt 
 from functools import wraps
 from flask import session, request, redirect, url_for

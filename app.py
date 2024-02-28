@@ -2,25 +2,17 @@ from flask import Flask, flash, render_template, request, session, redirect, url
 from flask_session import Session
 from ssl import AlertDescription
 from security import hash_password, check_password_hash, login_required
-from habits import setdefault, getdefaultdata, getuserdata, setuser_habits, update_progress
+from habits import setdefault, getdefaultdata, getuserdata, setuser_habits, update_progress, resetprogress
 from settings import getuserdata_settings, changehabits, update_goal
 import sqlite3
 
 app = Flask(__name__) #we initiate the Flask application
 # Secret Key 
-# Note It’s essential to store the secret key in a secure environment, rather than hardcoding it directly within the application.
-# TODO store the secret key in a secure environment
 app.secret_key = b'91e7fb421e04cdb4d42f16860b24000a0018fe6da614105bf088cbd775c06f52'
-# Initialize the Database
 
-# Set the default user in the database 
-# setdefault() This didn't work but I only have to set it once so its best that it didn't work
-
-@app.route('/', methods=["GET", "POST"]) #the / is the decorator (what to put into the URL) the / stands for the index page
+@app.route('/', methods=["GET", "POST"]) 
 def index():
-    # if the session is not empty
-        # implement the habits found in the habits table 
-        # render_template with the data 
+
     if request.method == "GET":
         if session.get("user_id") is None:
         # if session is empty (no one is logged in)
@@ -34,6 +26,8 @@ def index():
             user_id = session["user_id"]
             rows = getuserdata(user_id)
             return render_template('index.html', rows=rows)
+        
+
     
     if request.method == "POST": 
         if (request.form.get("habits_id")) is not None:
@@ -41,12 +35,27 @@ def index():
                 flash("403: Must log in to use this page", "error")
                 rows = getdefaultdata()
                 return render_template('index.html', rows=rows)
+            
+            # if the reset button was clicked reset the progress
+            if request.form.get("reset") is not None:
+                user_id = session["user_id"]
+                habits_id = request.form.get("habits_id")
+                print("pressed button")
+                if resetprogress(user_id = user_id, habits_id = habits_id) is True:
+                    flash("Your progress was reset", "success")
+                    user_id = session["user_id"]
+                    rows = getuserdata(user_id)
+                    return render_template('index.html', rows=rows)
+                else:
+                    flash("Failed to reset progress", "error")
+                
             user_id = session["user_id"]
             habits_id = request.form.get("habits_id")
             newprogress = request.form.get("progresslogged")
             if request.form.get("progresslogged") is None:
                 flash("403: Must input a positive number", "error")
 
+            # if the input is valid update the progress
             if update_progress(user_id=user_id, habits_id=habits_id, newprogress=newprogress) is True:
                 flash("Good job!", "success")
                 user_id = session["user_id"]
@@ -57,7 +66,6 @@ def index():
                 user_id = session["user_id"]
                 rows = getuserdata(user_id)
                 return render_template('index.html', rows=rows)
-
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -136,7 +144,7 @@ def settingsuser():
                 con.commit()
                 flash("The username was successfully updated", "success")
                 return render_template("settingsuser.html")
-                # TODO Tell the user that the name is updated!!
+
 
             elif two is not None:
                 # the update password button was pressed
@@ -171,7 +179,7 @@ def settingsuser():
                 hashnew = hash_password(request.form.get("new_password"))
                 cur.execute("UPDATE users SET hash = ? WHERE id = ?", (hashnew, user_id,))
                 con.commit()
-                # Tell the user that the password was updated!
+                # Tell the user that the password was updated
                 flash("The password was successfully updated", "success")
                 return render_template("settingsuser.html")
                 
@@ -217,15 +225,19 @@ def settingsmh():
             return render_template("settingsmh.html", rows=rows)
 
         if (request.form.get("habits_id")) is not None:
+            # if there was input to change the current goal
             user_id = session["user_id"]
             habits_id = request.form.get("habits_id")
             newgoal = request.form.get("newgoal")
 
-            if update_goal(habits_id=habits_id, newgoal=newgoal, user_id=user_id) is True:
-                flash("Your goal has been updated", "success")
-                user_id = session["user_id"]
-                rows = getuserdata_settings(user_id=user_id)
-                return render_template("settingsmh.html", rows=rows)
+            if newgoal is not None:
+                if update_goal(habits_id=habits_id, newgoal=newgoal, user_id=user_id) is True:
+                    flash("Your goal has been updated", "success")
+                    user_id = session["user_id"]
+                    rows = getuserdata_settings(user_id=user_id)
+                    return render_template("settingsmh.html", rows=rows)
+            else:
+                flash("403: You need to input a positive number", "error")
 
         user_id = session["user_id"]
         rows = getuserdata_settings(user_id=user_id)
@@ -242,8 +254,6 @@ def register():
                 return render_template("register.html")
 
             username = request.form.get("username")
-
-            # I'm missing checking if the username is already used
 
             existing_user = cur.execute("SELECT id FROM users WHERE username = ?", (username,)).fetchone()
             if existing_user:
@@ -269,6 +279,7 @@ def register():
             data = (
                 {"username": username, "hash": hash}
             )
+            
             # Input the username and the hashed password into the table users 
             cur.execute("INSERT INTO users (username, hash) VALUES(:username, :hash)", data)
             con.commit()

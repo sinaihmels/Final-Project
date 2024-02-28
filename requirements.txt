@@ -34,6 +34,6 @@ CREATE TABLE habits (
     unit TEXT NOT NULL
     );
 
-https://docs.python.org/3/library/sqlite3.html
+
 
 

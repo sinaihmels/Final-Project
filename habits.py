@@ -119,7 +119,13 @@ def update_progress(user_id, habits_id, newprogress):
         newprogress = int(newprogress)
         # Add the former progress to the newprogress
         newprogress = currentprogress + newprogress
-        print(f"newprogress with current: %", newprogress)
         # Update the data
         cur.execute("UPDATE user_habits SET progress = ? WHERE user_id = ? AND habits_id = ?", (newprogress, user_id, habits_id))
+        return True
+    
+def resetprogress(user_id, habits_id):
+    with sqlite3.connect("database.db") as con:
+        cur = con.cursor()
+        cur.execute("UPDATE user_habits SET progress = 0 WHERE habits_id = ? AND user_id = ?", (habits_id, user_id))
+        con.commit
         return True

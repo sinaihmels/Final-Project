@@ -3,10 +3,12 @@ import sqlite3
 def getuserdata_settings(user_id):
     with sqlite3.connect("database.db") as con:
         cur = con.cursor()
+        # Get user data from the database using the user_id
         cur.execute("SELECT user_habits.habits_id, habits.name, user_habits.goal, habits.unit, user_habits.position, habits.descriptionheader1, habits.descriptionheader2 FROM user_habits JOIN habits ON user_habits.habits_id=habits.id WHERE user_id = ?", (user_id,))
         rows = cur.fetchall()
         user_data_settings = []
 
+        # Create a dictionary of the data from the database
         for row in rows:
             data_dict = {
                 "user_habits.habits_id": row[0],
@@ -53,6 +55,7 @@ def changehabits(user_id, checked_habits):
 def update_goal(habits_id, newgoal, user_id):
     with sqlite3.connect("database.db") as con:
         cur = con.cursor()
+        # Update the goal 
         cur.execute("UPDATE user_habits SET goal = ? WHERE user_id = ? AND habits_id = ?",(newgoal, user_id, habits_id))
         con.commit()
         return True

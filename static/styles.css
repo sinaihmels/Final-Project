@@ -171,6 +171,19 @@ body {
     align-self: center;
 }
 
+.resetbutton {
+    background-color: #FAF7FF;
+    color:#474554;
+    height: 7%;
+    width: 25%;
+    font-size: 1vw;
+    box-sizing: border-box;
+    border-style: solid;
+    border-color: #666092;
+    border-radius: 20px;
+}
+
+
 .col {
     background-color: #FAF7FF;
     color: #474554;
