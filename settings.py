@@ -39,8 +39,7 @@ def changehabits(user_id, checked_habits):
         for habit_name in habits_to_link:
             cur.execute("SELECT id FROM habits WHERE name = ?", (habit_name,))
             habit_id = cur.fetchone()[0]
-            #TODO use default_goal from habits?
-            cur.execute("INSERT INTO user_habits (user_id, habits_id, progress, goal, position) VALUES (?, ?, 0, 0, 0)", (user_id, habit_id))
+            cur.execute("INSERT INTO user_habits (user_id, habits_id, progress, goal, position) VALUES (?, ?, 0, 1, 0)", (user_id, habit_id))
 
         # Unlink old habits
         for habit_name in habits_to_unlink:

@@ -18,8 +18,11 @@ Home
                     {{ row['habits.descriptionheader2'] }}
                 </div>
                 <p></p>
-                <img src="{{ row['habits.icon_path'] }}/{{ row['habits.name'] }}" alt="{{ row['habits.name'] }}"
-                    class="img-fluid" type="image" style="width: 150px; height: 150px;">
+                {% if row['user_habits.progress'] >= row['user_habits.goal'] %}
+                    <img src="{{ row['habits.icon_path'] }}/gif.gif" alt="{{ row['habits.name'] }}" class="img-fluid" type="image" style="width: 150px; height: 150px">
+                {% else %}
+                    <img src="{{ row['habits.icon_path'] }}/{{ row['percentage'] }}.png" alt="{{ row['habits.name'] }}" class="img-fluid" type="image" style="width: 150px; height: 150px">
+                {% endif %}
                     <p></p>
                 <div class="current status">
                     <p class="smalltext">{{ row['habits.descriptionprogress1'] }} {{ row['user_habits.progress'] }} {{ row['habits.descriptionprogress2'] }}</p>

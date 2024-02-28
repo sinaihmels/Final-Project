@@ -226,3 +226,6 @@ SELECT
 FROM user_habits 
 JOIN habits ON user_habits.habits_id=habits.id 
 WHERE user_id = 1;
+
+ALTER TABLE user_habits ADD progresstogoal INTEGER; 
+ALTER TABLE user_habits DROP COLUMN progresstogoal;

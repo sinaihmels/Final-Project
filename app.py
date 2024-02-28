@@ -37,23 +37,26 @@ def index():
     
     if request.method == "POST": 
         if (request.form.get("habits_id")) is not None:
-                user_id = session["user_id"]
-                habits_id = request.form.get("habits_id")
-                newprogress = request.form.get("progresslogged")
-                if request.form.get("progresslogged") is None:
-                    flash("403: Must input a positive number", "error")
-            
+            if session.get("user_id") is None:
+                flash("403: Must log in to use this page", "error")
+                rows = getdefaultdata()
+                return render_template('index.html', rows=rows)
+            user_id = session["user_id"]
+            habits_id = request.form.get("habits_id")
+            newprogress = request.form.get("progresslogged")
+            if request.form.get("progresslogged") is None:
+                flash("403: Must input a positive number", "error")
 
-                if update_progress(user_id=user_id, habits_id=habits_id, newprogress=newprogress) is True:
-                    flash("Good job!", "success")
-                    user_id = session["user_id"]
-                    rows = getuserdata(user_id)
-                    return render_template('index.html', rows=rows)
-                else: 
-                    flash("403: Error", "error")
-                    user_id = session["user_id"]
-                    rows = getuserdata(user_id)
-                    return render_template('index.html', rows=rows)
+            if update_progress(user_id=user_id, habits_id=habits_id, newprogress=newprogress) is True:
+                flash("Good job!", "success")
+                user_id = session["user_id"]
+                rows = getuserdata(user_id)
+                return render_template('index.html', rows=rows)
+            else: 
+                flash("403: Error", "error")
+                user_id = session["user_id"]
+                rows = getuserdata(user_id)
+                return render_template('index.html', rows=rows)
 
 
 

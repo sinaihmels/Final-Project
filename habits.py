@@ -69,7 +69,8 @@ def getdefaultdata():
                 "habits.descriptionprogress2": row[8],
                 "habits.descriptionlogmore": row[9],
                 "habits.unit": row[10],
-                "habits.id": row[11]
+                "habits.id": row[11],
+                "percentage": 0
             }
             default_data.append(data_dict)
         return default_data
@@ -100,7 +101,8 @@ def getuserdata(user_id):
                 "habits.descriptionprogress2": row[8],
                 "habits.descriptionlogmore": row[9],
                 "habits.unit": row[10],
-                "habits.id": row[11]
+                "habits.id": row[11],
+                "percentage": round((row[7] / row[3] * 100) /10)*10
             }
             user_data.append(data_dict)
         return user_data

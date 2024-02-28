@@ -7,12 +7,11 @@
     <link href="/static/styles.css" rel="stylesheet">  
 
     <title>My Habits {% block title %}{% endblock %}
-    <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico"> <!--this favicon doesn't work jet-->
     </title>
 </head>
 <body>
         <div class="topnav" id="navbar">
-            <image src="/static/Logo.ico" class="img-fluid" alt="a picture of the logo"></image>
+            <image src="/static/Logo.png" class="logo" alt="a picture of the logo"></image>
             {% if session["user_id"] %}
                 <a class="nav-link" href="/">Home</a>
                 <a class="nav-link" href="/settingsmh">Settings</a>
