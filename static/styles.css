@@ -18,9 +18,8 @@ body {
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #666092;
-    border-radius: 4px;
-    box-sizing: 15%;
+    border-style: 6px solid #666092;
+    border-radius: 20px;
 }
 
 .input2 {
@@ -183,6 +182,9 @@ body {
     border-radius: 20px;
 }
 
+.goal {
+    min-block-size: 26%;
+}
 
 .col {
     background-color: #FAF7FF;
